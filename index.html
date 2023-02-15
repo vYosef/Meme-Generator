@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Meme Generator</title>
+</head>
+<body onload="onInit()">
+    <header class="header flex space-between clean-list">
+        <div>LOGO</div>
+        <div>Gallery</div>
+        <div>Memes</div>
+        <div>About</div>
+    </header>
+    
+    <section class="gallery">
+        <div class="image-container flex space-between"></div>
+    </section>
+    
+    <section class="editor">
+        <canvas id="meme-canvas" class="meme-canvas" width="400" height="400"></canvas>
+        <div class="meme-control">
+            <label for="first-line">enter first line:</label>
+            <input type="text" name="first-line" 
+            id="first-line" class="first-line" onkeyup="onLineType(this.value)">
+        </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="main/memeService.js"></script>
+    <script src="main/memeController.js"></script>
+    <script src="main/galleryController.js"></script>
+    <script src="main/utils.js"></script>
+</body>
+</html>
