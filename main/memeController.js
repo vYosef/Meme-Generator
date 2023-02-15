@@ -11,7 +11,8 @@ function setMemeCanvas() {
 function renderMeme(id) {
     let currLine = getCurrLine()
     let meme = getMeme()
-    let img = setImg(id)
+    let img = setImg()
+    console.log(img)
     let currtxt = meme.lines[currLine].txt
     let prevTxt = currLine === 0 ? meme.lines[1].txt :meme.lines[0].txt
     let pos = currLine === 0 ? gElCanvas.height / 8 : gElCanvas.height / 1.1
@@ -25,6 +26,7 @@ function renderMeme(id) {
 }
 
 function drawImage(img) {
+    console.log(img)
     let image = new Image()
     image.src = img.url
     image.width = '100%'
@@ -34,7 +36,7 @@ function drawImage(img) {
 function writeText(meme, txt, y, currLine) {
     gCtx.beginPath()
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = `${meme.lines[currLine].color}`
+    gCtx.strokeStyle = `${meme.lines[currLine].strokeColor}`
     gCtx.fillStyle = `${meme.lines[currLine].color}`
     gCtx.font = `${meme.lines[currLine].size}px Impact`
     gCtx.textAlign = 'center'
@@ -81,6 +83,16 @@ function onSaveMeme() {
     saveMeme()
     resetMeme()
     renderMeme()
+}
+
+function getRandomMeme() {
+    let images = getGImg()
+    let randId = getRandomIntInclusive(1, images.length - 1)
+    randomizeMeme(randId)
+    randomizeId(randId)
+    toggleComponents(false)
+    renderMeme(randId)
+    callResetMeme()
 }
 
 function onLoadMemes() { // finish later

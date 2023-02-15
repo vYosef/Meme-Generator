@@ -24,7 +24,7 @@ function renderGallery() {
 
 function onImgSelect(id) {
     gCurrImgId = +id
-    let img = setImg(gCurrImgId)
+    let img = setImg()
     toggleComponents(false)
     renderMeme(img)
 }
@@ -44,8 +44,4 @@ function toggleComponents(calledFromHeader) {
     elEditor.classList.toggle('hidden')
     elEditor.classList.toggle('flex')
 } 
-
-function getRandomMeme() {
-    console.log('hi')
-}
 

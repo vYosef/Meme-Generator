@@ -109,13 +109,15 @@ let gMeme = {
             txt: '', 
             size: 30, 
             align: 'left', 
-            color: 'black' 
+            color: 'black',
+            strokeColor: 'black' 
         }, 
         { 
             txt: '', 
             size: 30, 
             align: 'left', 
-            color: 'black' 
+            color: 'black',
+            strokeColor: 'black' 
         }, 
     ] 
 }
@@ -129,13 +131,15 @@ function resetMeme() {
                 txt: '', 
                 size: 30, 
                 align: 'left', 
-                color: 'black' 
+                color: 'black',
+                strokeColor: 'black'
             }, 
             { 
                 txt: '', 
                 size: 30, 
                 align: 'left', 
-                color: 'black' 
+                color: 'black',
+                strokeColor: 'black' 
             }, 
         ] 
     }
@@ -193,3 +197,59 @@ function loadMemes() {
     let memes = loadFromStorage('memes')
     return memes
 }
+
+function randomizeId(id) {
+    gCurrImgId = id
+}
+
+function randomizeMeme(id) {
+    console.log(id)
+    gMeme = { 
+        selectedImgId: id, 
+        selectedLineIdx: 0, 
+        lines: [ 
+            { 
+                txt: getRandomText(), 
+                size: getRandomIntInclusive(15, 50), 
+                align: 'left', 
+                color: getRandomColor(),
+                strokeColor: getRandomColor()
+            }, 
+            { 
+                txt: getRandomText(), 
+                size: getRandomIntInclusive(15, 50), 
+                align: 'left', 
+                color: getRandomColor(),
+                strokeColor: getRandomColor()
+            }, 
+        ] 
+    }
+}
+
+function getRandomText() {
+    let opts = [
+        '',
+        'im dumb',
+        'i like fallafel',
+        'nice, right?',
+        'one does not simply',
+        'broken code, everywhere...',
+        'you are funny',
+        'kiss',
+        'trump card',
+        'aliens!',
+        'weird things',
+        'glasses',
+        'creepy',
+        'make changes to the code',
+        'im tired',
+        'tell me more',
+    ]
+    let randTxt = opts[getRandomIntInclusive(0, opts.length - 1)] 
+    return randTxt
+}
+
+function callResetMeme() {
+    resetMeme()
+}
+
