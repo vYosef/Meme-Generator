@@ -8,27 +8,39 @@
     <title>Meme Generator</title>
 </head>
 <body onload="onInit()">
-    <header class="header flex space-between clean-list">
-        <div>LOGO</div>
-        <div>Gallery</div>
-        <div>Memes</div>
-        <div>About</div>
+    <header class="header clean-list">
+        <ul class="flex space-between clean-list">
+            <li>LOGO</li>
+            <li onclick="showGallery()">Gallery</li>
+            <li onclick="onLoadMemes()">Memes</li>
+            <li>About</li>
+        </ul>
     </header>
     
     <section class="gallery">
-        <div class="image-container flex space-between"></div>
+        <button class="flexible" onclick="getRandomMeme()">im flexible</button>
+        <div class="image-container"></div>
     </section>
     
-    <section class="editor">
+    <section class="editor hidden">
         <canvas id="meme-canvas" class="meme-canvas" width="400" height="400"></canvas>
         <div class="meme-control">
-            <label for="first-line">enter first line:</label>
-            <input type="text" name="first-line" 
-            id="first-line" class="first-line" onkeyup="onLineType(this.value)">
+            <label for="enter-text">enter text:</label>
+            <input type="text" name="enter-text" 
+            id="enter-text" class="enter-text" onkeyup="onLineType(this.value)">
+            <label for="color-picker">change text color</label>
+            <input type="color" name="color-picker" 
+            id="color-picker" class="color-picker" onchange="onChangeTextColor(this.value)">
+            <button class="font-grow" onclick="onChangeFont(2)">increase font</button>
+            <button class="font-shrink" onclick="onChangeFont(-2)">decrease font</button>
+            <button class="switch-line" onclick="onSwitchLine()">switch line</button>
+            <button class="save" onclick="onSaveMeme()">save</button>
         </div>
     </section>
 
-    <footer></footer>
+    <section class="saved-memes hidden"></section>
+
+    <!-- <footer>create by Yosef Balter</footer> -->
 
     <script src="main/memeService.js"></script>
     <script src="main/memeController.js"></script>

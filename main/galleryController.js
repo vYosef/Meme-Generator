@@ -24,8 +24,28 @@ function renderGallery() {
 
 function onImgSelect(id) {
     gCurrImgId = +id
-    // console.log(gCurrImgId)
     let img = setImg(gCurrImgId)
+    toggleComponents(false)
     renderMeme(img)
-    // resetInputs()
 }
+
+function showGallery() {
+    toggleComponents(true)
+}
+
+function toggleComponents(calledFromHeader) {
+    let elGallery = document.querySelector('.gallery')
+    let elEditor = document.querySelector('.editor')
+    if (!elGallery.classList.contains('hidden') && calledFromHeader) return
+    if (elGallery.classList.contains('hidden') && elEditor.classList.contains('hidden')) {
+        elEditor.classList.toggle('hidden')
+    }
+    elGallery.classList.toggle('hidden')
+    elEditor.classList.toggle('hidden')
+    elEditor.classList.toggle('flex')
+} 
+
+function getRandomMeme() {
+    console.log('hi')
+}
+

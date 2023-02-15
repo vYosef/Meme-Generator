@@ -1,0 +1,10 @@
+.meme-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.meme-control * {
+    max-width: 30%;
+}

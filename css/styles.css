@@ -8,3 +8,9 @@
 @import 'components/canvas.css';
 @import 'components/image-container.css';
 @import 'components/gallery-item.css';
+@import 'components/meme-control.css';
+@import 'components/gallery.css';
+@import 'components/editor.css';
+
+/* MEDIA QUERIS */
+@import 'setup/mq.css';

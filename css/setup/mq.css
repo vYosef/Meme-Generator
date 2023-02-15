@@ -1,0 +1,27 @@
+@media (max-width: 500px) {
+    .image-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 500px) {
+    .image-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .image-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1500px) {
+    .image-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
