@@ -6,6 +6,8 @@ let gCurrLine = 0
 
 let gSavedMemes = []
 
+let gCurrSavedMemeId
+
 let gKeywordSearchCountMap = {'funny': 12,'cat': 16, 'baby': 2}
 
 let gImgs = [
@@ -159,17 +161,26 @@ function setImg() {
     return img[0]
 }
 
+function setMeme(meme) {
+    gMeme = meme
+}
+
+function setSavedMemeId(id) {
+    gCurrSavedMemeId = id
+    // console.log(gCurrSavedMemeId)
+}
+
+function setId(id) {
+    gCurrImgId = id
+}
+
 function getCurrLine() {
     return gCurrLine
 }
 
-function switchLine(diff) {
+function switchLine() {
     if (gCurrLine === 1) gCurrLine -= 1
     else gCurrLine += 1
-    return gCurrLine
-}
-
-function getCurrLine() {
     return gCurrLine
 }
 
@@ -189,7 +200,19 @@ function changeFont(diff) {
 
 function saveMeme() {
     let key = 'memes'
-    gSavedMemes.push(gMeme)
+    if(gCurrSavedMemeId) deletePrevMeme(key)
+    gSavedMemes.push({
+        id: gCurrSavedMemeId || makeId(),
+        meme: gMeme,
+        img: gElCanvas.toDataURL()
+    })
+    saveToStorage(key, gSavedMemes)
+}
+
+function deletePrevMeme(key) {
+    
+    let prevMeme = gSavedMemes.find(meme => meme.id === gCurrSavedMemeId)
+    gSavedMemes.splice(gSavedMemes.indexOf(prevMeme), 1)
     saveToStorage(key, gSavedMemes)
 }
 

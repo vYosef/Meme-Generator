@@ -12,7 +12,7 @@ function renderMeme(id) {
     let currLine = getCurrLine()
     let meme = getMeme()
     let img = setImg()
-    console.log(img)
+    // console.log(img)
     let currtxt = meme.lines[currLine].txt
     let prevTxt = currLine === 0 ? meme.lines[1].txt :meme.lines[0].txt
     let pos = currLine === 0 ? gElCanvas.height / 8 : gElCanvas.height / 1.1
@@ -26,7 +26,7 @@ function renderMeme(id) {
 }
 
 function drawImage(img) {
-    console.log(img)
+    // console.log(img)
     let image = new Image()
     image.src = img.url
     image.width = '100%'
@@ -61,7 +61,7 @@ function onChangeTextColor(color) {
 }
 
 function onChangeFont(diff) {
-    console.log(diff)
+    // console.log(diff)
     changeFont(diff)
     renderMeme(gCurrImgId)
 }
@@ -86,27 +86,43 @@ function onSaveMeme() {
 }
 
 function getRandomMeme() {
+    gComponent = 1
+    toggleComponents()
     let images = getGImg()
     let randId = getRandomIntInclusive(1, images.length - 1)
     randomizeMeme(randId)
     randomizeId(randId)
-    toggleComponents(false)
     renderMeme(randId)
     callResetMeme()
 }
 
 function onLoadMemes() { // finish later
-    // let memes = loadMemes()
-    // let images = getGImg()
-    // let memeStr = ''
+    let memes = loadMemes()
     // console.log(memes)
-    // let elGallery = document.querySelector('.gallery')
-    // let elEditor = document.querySelector('.editor')
-    // elGallery.classList.add('hidden')
-    // elEditor.classList.add('hidden')
+    let elSavedMemes = document.querySelector('.saved-memes')
+    let savedMemeStr = ''
 
-    // memes.forEach((meme) => {
-    //     let memeImg = images.filter(image => meme.selectedImgId === image.id)
-    //     console.log(memeImg)
-    // })
+    gComponent = 2
+    toggleComponents()
+
+    memes.forEach((meme) => {
+        let id = meme.id
+        savedMemeStr += `<img src="${meme.img}"
+        data-id="${id}" onclick="onEditMeme(this.dataset.id)">`
+    })
+    elSavedMemes.innerHTML = savedMemeStr
+}
+
+function onEditMeme(id) {
+    let memes = loadMemes()
+    let meme = memes.filter(meme => meme.id === id)[0]
+
+    setSavedMemeId(id)
+    setMeme(meme.meme)
+    setId(meme.meme.selectedImgId)
+
+    gComponent = 1
+    toggleComponents()
+
+    renderMeme()
 }

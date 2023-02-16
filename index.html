@@ -10,7 +10,7 @@
 <body onload="onInit()">
     <header class="header clean-list">
         <ul class="flex space-between clean-list">
-            <li>LOGO</li>
+            <li onclick="showGallery()">LOGO</li>
             <li onclick="showGallery()">Gallery</li>
             <li onclick="onLoadMemes()">Memes</li>
             <li>About</li>
@@ -19,6 +19,10 @@
     
     <section class="gallery">
         <button class="flexible" onclick="getRandomMeme()">im flexible</button>
+        </br>
+        <label for="image-sort">image sort:</label>
+        <input type="text" name="image-sort" 
+        id="image-sort" class="image-sort" onkeyup="onSortImages(this.value)">
         <div class="image-container"></div>
     </section>
     
