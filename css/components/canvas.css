@@ -1,4 +1,7 @@
 .meme-canvas {
-    margin-inline: auto;
-    outline: 1px solid green
+    /* margin-inline: auto; */
+    margin: 0;
+    outline: 1px solid green;
+    border-radius: 20px;
+    width: 100%;
 }

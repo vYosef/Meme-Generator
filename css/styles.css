@@ -11,6 +11,15 @@
 @import 'components/meme-control.css';
 @import 'components/gallery.css';
 @import 'components/editor.css';
+@import 'components/canvas-container.css';
+@import 'components/saved-memes.css';
+@import 'components/logo.css';
+@import 'components/about.css';
+@import 'components/header-btn.css';
+@import 'components/editor-components.css';
+@import 'components/curr-line.css';
+@import 'components/font-controll.css';
+@import 'components/stroke-picker.css';
 
 /* MEDIA QUERIS */
 @import 'setup/mq.css';

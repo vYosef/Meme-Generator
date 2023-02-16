@@ -1,0 +1,11 @@
+.editor-components {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    gap: 5vw;
+    /* width: 100%; */
+    margin-inline-start: 10vw;
+    margin-inline-end: 10vw;
+    max-height: 40vh;
+    margin: 0;
+}

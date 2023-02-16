@@ -10,14 +10,15 @@
 <body onload="onInit()">
     <header class="header clean-list">
         <ul class="flex space-between clean-list">
-            <li onclick="showGallery()">LOGO</li>
-            <li onclick="showGallery()">Gallery</li>
-            <li onclick="onLoadMemes()">Memes</li>
-            <li>About</li>
+            <li class="logo" onclick="showGallery()">LOGO</li>
+            <li class="header-btn" onclick="showGallery()">Gallery</li>
+            <li class="header-btn" onclick="onLoadMemes()">Memes</li>
+            <li class="about">About</li>
         </ul>
     </header>
     
     <section class="gallery">
+        <h1>Image Gallery</h1>
         <button class="flexible" onclick="getRandomMeme()">im flexible</button>
         </br>
         <label for="image-sort">image sort:</label>
@@ -27,24 +28,44 @@
     </section>
     
     <section class="editor hidden">
-        <canvas id="meme-canvas" class="meme-canvas" width="400" height="400"></canvas>
-        <div class="meme-control">
-            <label for="enter-text">enter text:</label>
-            <input type="text" name="enter-text" 
-            id="enter-text" class="enter-text" onkeyup="onLineType(this.value)">
-            <label for="color-picker">change text color</label>
-            <input type="color" name="color-picker" 
-            id="color-picker" class="color-picker" onchange="onChangeTextColor(this.value)">
-            <button class="font-grow" onclick="onChangeFont(2)">increase font</button>
-            <button class="font-shrink" onclick="onChangeFont(-2)">decrease font</button>
-            <button class="switch-line" onclick="onSwitchLine()">switch line</button>
-            <button class="save" onclick="onSaveMeme()">save</button>
+        <h1>Meme Editor</h1>
+        <div class="editor-components">
+            <div class="canvas-container">
+                <canvas id="meme-canvas" class="meme-canvas" width="400" height="400"></canvas>
+            </div>
+            <div class="meme-control">
+                <label for="enter-text">enter text:</label>
+                <input type="text" name="enter-text" 
+                id="enter-text" class="enter-text" onkeyup="onLineType(this.value)">
+                
+                <label for="curr-line">current line:</label>
+                <div class="curr-line">1</div>
+                
+                <label for="color-picker">change text color</label>
+                <input type="color" name="color-picker" 
+                id="color-picker" class="color-picker" onchange="onChangeTextColor(this.value)">
+                
+                <label for="stroke-picker">change text outline</label>
+                <input type="color" name="stroke-picker" 
+                id="stroke-picker" class="stroke-picker" onchange="onChangeTextOutline(this.value)">
+                
+                <div class="font-control">
+                    <button class="font-grow" onclick="onChangeFont(2)">increase font</button>
+                    <button class="font-shrink" onclick="onChangeFont(-2)">decrease font</button> 
+                </div>
+                
+                <button class="switch-line" onclick="onSwitchLine()">switch line</button>
+                <button class="save" onclick="onSaveMeme()">save</button>
+            </div>
         </div>
+        
     </section>
 
-    <section class="saved-memes hidden"></section>
+    <section class="saved-memes hidden">
+        <h1>Your Memes</h1>
+    </section>
 
-    <!-- <footer>create by Yosef Balter</footer> -->
+    <footer>created by Yosef Balter</footer>
 
     <script src="main/memeService.js"></script>
     <script src="main/memeController.js"></script>

@@ -1,0 +1,12 @@
+.font-control {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1vw;
+    background-color: #19a59f;
+    border-radius: 15px;
+    padding: 1vw;
+}
+
+.font-control button {
+    width: 100%;
+}

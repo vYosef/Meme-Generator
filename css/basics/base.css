@@ -8,7 +8,8 @@ html {
 
 body {
     margin: 0;
-    background-color: lightBlue;
+    background-color: #22252c;
+    text-align: center;
 }
 
 img {
@@ -18,12 +19,23 @@ img {
 }
 
 footer {
-    background-color: blue;
+    margin-block-start: 50vh;
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
     text-align: center;
+    border-radius: 37px;
+    padding: 2vh 5vw 2vh;
+    margin: 2vh 5% 3vh;
+
+    padding-block-start: 3vh;
+    padding-block-end: 3vh;
 }
 
 li {
     cursor: pointer;
+}
+
+li:hover {
+    scale: 1.2;
 }
 
 button {
@@ -31,5 +43,35 @@ button {
     margin: 5px 0;
     border: 1px solid black;
     border-radius: 10px;
+    background-image: linear-gradient(-38deg, #66c4dc 0%, #40b1ce 50%, #0c98bb 100%);
+}
+
+button:hover {
+    opacity: 0.5;
+    scale: 1.2;
+}
+
+input {
+    border-radius: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: #22252c;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
 }
 

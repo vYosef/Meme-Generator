@@ -1,0 +1,8 @@
+.header-btn {
+    padding: auto;
+    box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    background-color: #fefefe;
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+}

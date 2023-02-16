@@ -1,3 +1,9 @@
 .editor {
+    justify-content: space-between;
     flex-direction: column;
+    width: 80%;
+    margin-inline-start: 10%;
+    margin-inline-end: 10%;
+    margin-block-start: 5vh;
+    padding: 25px;
 }

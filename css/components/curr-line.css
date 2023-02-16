@@ -1,0 +1,5 @@
+.curr-line {
+    background-color: grey;
+    min-height: 3vh;
+    margin-block-start: 1vh;
+}

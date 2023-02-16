@@ -124,6 +124,10 @@ let gMeme = {
     ] 
 }
 
+function resetLine() {
+    gCurrLine = 0
+}
+
 function resetMeme() {
     gMeme = { 
         selectedImgId: 2, 
@@ -167,7 +171,6 @@ function setMeme(meme) {
 
 function setSavedMemeId(id) {
     gCurrSavedMemeId = id
-    // console.log(gCurrSavedMemeId)
 }
 
 function setId(id) {
@@ -187,18 +190,31 @@ function switchLine() {
 function setLineTxt(txt) {
     gMeme.selectedImgId = gCurrImgId
     gMeme.lines[gCurrLine].txt = txt
-    // console.log(gMeme)
 }
 
 function changeTextColor(color) {
     gMeme.lines[gCurrLine].color = color
 }
 
+function changeTextStroke(color) {
+    gMeme.lines[gCurrLine].strokeColor = color
+}
+
 function changeFont(diff) {
     gMeme.lines[gCurrLine].size += diff  
 }
+ 
+function updateSavedMemes() {
+    if(gSavedMemes.length !== 0) return
+    let memes = loadMemes()
+    if (!memes) return
+    console.log(memes)
+    gSavedMemes = memes
+    console.log(gSavedMemes)
+}
 
 function saveMeme() {
+    updateSavedMemes()
     let key = 'memes'
     if(gCurrSavedMemeId) deletePrevMeme(key)
     gSavedMemes.push({

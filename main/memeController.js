@@ -9,10 +9,10 @@ function setMemeCanvas() {
 }
 
 function renderMeme(id) {
+    resizeCanvas()
     let currLine = getCurrLine()
     let meme = getMeme()
     let img = setImg()
-    // console.log(img)
     let currtxt = meme.lines[currLine].txt
     let prevTxt = currLine === 0 ? meme.lines[1].txt :meme.lines[0].txt
     let pos = currLine === 0 ? gElCanvas.height / 8 : gElCanvas.height / 1.1
@@ -25,12 +25,18 @@ function renderMeme(id) {
     writeText(meme, prevTxt, prevPos, prevLine)
 }
 
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    let canvasSize = elContainer.offsetHeight < elContainer.offsetWidth ? elContainer.offsetHeight : elContainer.offsetWidth
+    gElCanvas.width = canvasSize
+    gElCanvas.height = canvasSize  
+}
+
 function drawImage(img) {
-    // console.log(img)
     let image = new Image()
     image.src = img.url
     image.width = '100%'
-    gCtx.drawImage(image, 0, 0, gElCanvas.width, gElCanvas.height)
+    gCtx.drawImage(image, 0, 0, gElCanvas.width, gElCanvas.height)  
 }
 
 function writeText(meme, txt, y, currLine) {
@@ -45,38 +51,50 @@ function writeText(meme, txt, y, currLine) {
     gCtx.strokeText(txt,  gElCanvas.width / 2, y)
 }
 
+function showCurLine() {
+    let currLine = getCurrLine()
+    let elCurrLine = document.querySelector('.curr-line')
+    if(currLine === 0) {
+        elCurrLine.innerText = 1
+        return
+    }
+    if(currLine === 1) {
+        elCurrLine.innerText = 2
+        return
+    }
+}
+
 function onLineType(txt) {
     if (gCurrImgId === undefined) return
-    // console.log(gMeme)
     setLineTxt(txt)
     renderMeme(+gCurrImgId)
 }
 
 function onChangeTextColor(color) {
-    // console.log(color)
     changeTextColor(color)
-    // console.log(meme)
-    
     renderMeme(gCurrImgId)
 }
 
+function onChangeTextOutline(color) {
+    changeTextStroke(color)
+    renderMeme()
+}
+
 function onChangeFont(diff) {
-    // console.log(diff)
     changeFont(diff)
     renderMeme(gCurrImgId)
 }
 
 function resetInput() {
-    let input = document.querySelector('input')
-    let currLine = getCurrLine()
-    let meme = getMeme()
-    input.value = meme.lines[currLine].txt
-    // input.value = ''
+    let input = document.querySelector('.enter-text')
+    input.value = ''
+    input.textContent = ''
 }
 
 function onSwitchLine() {
     switchLine()
     resetInput()
+    showCurLine()
 }
 
 function onSaveMeme() {
@@ -96,9 +114,8 @@ function getRandomMeme() {
     callResetMeme()
 }
 
-function onLoadMemes() { // finish later
+function onLoadMemes() { 
     let memes = loadMemes()
-    // console.log(memes)
     let elSavedMemes = document.querySelector('.saved-memes')
     let savedMemeStr = ''
 

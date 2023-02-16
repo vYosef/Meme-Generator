@@ -1,0 +1,8 @@
+.saved-memes {
+    padding: 2%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3vw;
+    background-color: #383b42;
+    margin-inline-start: 10%;
+    margin-inline-end: 10%;
+}
