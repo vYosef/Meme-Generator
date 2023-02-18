@@ -4,6 +4,7 @@
     margin-inline-end: 10vw;
     margin-block-end: 2vh;
     overflow: scroll;
+    border-radius: 20px;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

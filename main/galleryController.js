@@ -7,6 +7,7 @@ function onInit() {
     setMemeCanvas()
     let images= getGImg()
     renderGallery(images)
+    renderSearchWords()
 }
 
 function renderGallery(images) {
@@ -14,17 +15,39 @@ function renderGallery(images) {
 
     let imgStr = ''
     images.forEach(img => imgStr = imgStr + `<img class="gallery-item" 
-                    src="${img.url}" alt="puppies" data-id="${img.id}" onclick="onImgSelect(this.dataset.id)">`)
+                    src="${img.url}" alt="puppies" data-id="${img.id}" onclick="onImgSelect(this, this.dataset.id)">`)
 
     imageContainer.innerHTML = imgStr
 }
 
-function onImgSelect(id) {
+function renderSearchWords() {
+    let searchWords = getSearchWords()
+    let elWordContainer = document.querySelector('.search-word-container')
+    let wordStr = ''
+    for(const key in searchWords) {
+        wordStr += `<div class="keyWord" 
+        style="font-size: ${searchWords[key]}px;">
+        <p onclick="onKeyWordClick(this.innerText)">${key}</p></div>`
+    }
+    elWordContainer.innerHTML = wordStr
+}
+
+function onKeyWordClick(elWord) {
+    let searchWords = getSearchWords()
+    let searchWordSize = searchWords[elWord]
+    searchWordSize++
+    updateSearchWords(elWord, searchWordSize)
+    renderSearchWords()
+    onSortImages(elWord)
+}
+
+function onImgSelect(elImg, id) {
+    let imgRatio = elImg.height / elImg.width
+    setRatio(imgRatio)
     gCurrImgId = +id
-    let img = setImg()
     gComponent = 1
     toggleComponents()
-    renderMeme(img)
+    renderMeme()
     showCurLine()
 }
 
@@ -39,7 +62,6 @@ function showGallery() {
 }
 
 function resetColors() {
-    console.log('hi')
     let colorInput = document.querySelector('.color-picker')
     let strokeColorInput = document.querySelector('.stroke-picker')
     colorInput.value = "#000000"
@@ -90,4 +112,11 @@ function onSortImages(txt) {
         }
     })
     renderGallery(sortedImages)
+}
+
+function onSetLang(lng) {
+    setLang(lng)
+    if (lng === 'he') document.body.classList.add('rtl')
+    else document.body.classList.remove('rtl')
+    doTrans()
 }

@@ -28,6 +28,9 @@
         flex-direction: column;
         /* width: 10%; */
     }
+    footer {
+        margin-block-start: 100vh;
+    }
 }
 
 @media (min-width: 850px) {

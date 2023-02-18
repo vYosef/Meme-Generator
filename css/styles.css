@@ -20,6 +20,9 @@
 @import 'components/curr-line.css';
 @import 'components/font-controll.css';
 @import 'components/stroke-picker.css';
+@import 'components/editor-title.css';
+@import 'components/search-word-container.css';
+@import 'components/keyWord.css';
 
 /* MEDIA QUERIS */
 @import 'setup/mq.css';

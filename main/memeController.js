@@ -3,26 +3,34 @@
 let gElCanvas
 let gCtx
 
+let gRatio = 1
+
 function setMemeCanvas() {
     gElCanvas = document.querySelector('.meme-canvas')
     gCtx = gElCanvas.getContext('2d')
 }
 
-function renderMeme(id) {
-    resizeCanvas()
-    let currLine = getCurrLine()
+function renderMeme(imgRatio) {
+    let canvas = document.querySelector('.meme-canvas')
+    canvas.height = canvas.width * gRatio
+    
     let meme = getMeme()
     let img = setImg()
-    let currtxt = meme.lines[currLine].txt
-    let prevTxt = currLine === 0 ? meme.lines[1].txt :meme.lines[0].txt
-    let pos = currLine === 0 ? gElCanvas.height / 8 : gElCanvas.height / 1.1
-    let prevPos = currLine === 0 ? gElCanvas.height / 1.1 : gElCanvas.height / 8
-    let prevLine = currLine === 0 ? 1 : 0
-
+    let font = getFont()
+    let pos =  gElCanvas.height / 16
+ 
     drawImage(img)
 
-    writeText(meme, currtxt, pos, currLine)
-    writeText(meme, prevTxt, prevPos, prevLine)
+    let lines = meme.lines
+
+    lines.forEach((line, idx) => {
+        pos = pos * 2
+        if (idx === lines.length - 1) pos = gElCanvas.height / 1.1
+        writeText(meme, line.txt, pos, idx, font)
+    })
+
+    // writeText(meme, currtxt, pos, currLine, font)
+    // writeText(meme, prevTxt, prevPos, prevLine, font)
 }
 
 function resizeCanvas() {
@@ -33,18 +41,18 @@ function resizeCanvas() {
 }
 
 function drawImage(img) {
+    gCtx.beginPath()
     let image = new Image()
     image.src = img.url
     image.width = '100%'
     gCtx.drawImage(image, 0, 0, gElCanvas.width, gElCanvas.height)  
 }
 
-function writeText(meme, txt, y, currLine) {
-    gCtx.beginPath()
+function writeText(meme, txt, y, currLine, font) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = `${meme.lines[currLine].strokeColor}`
     gCtx.fillStyle = `${meme.lines[currLine].color}`
-    gCtx.font = `${meme.lines[currLine].size}px Impact`
+    gCtx.font = `${meme.lines[currLine].size}px ${font}`
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
     gCtx.fillText(txt,  gElCanvas.width / 2, y)
@@ -68,6 +76,10 @@ function onLineType(txt) {
     if (gCurrImgId === undefined) return
     setLineTxt(txt)
     renderMeme(+gCurrImgId)
+}
+
+function onUpdateFont(font) {
+    updateFont(font)
 }
 
 function onChangeTextColor(color) {
@@ -142,4 +154,45 @@ function onEditMeme(id) {
     toggleComponents()
 
     renderMeme()
+}
+
+function onUploadImg() {
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg') // Gets the canvas content as an image format
+  
+    function onSuccess(uploadedImgUrl) {
+
+      const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+      console.log(encodedUploadedImgUrl)
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+    }
+
+    doUploadImg(imgDataUrl, onSuccess)
+  }
+  
+  function doUploadImg(imgDataUrl, onSuccess) {
+    const formData = new FormData()
+    formData.append('img', imgDataUrl)
+  
+    const XHR = new XMLHttpRequest()
+    XHR.onreadystatechange = () => {
+      
+      if (XHR.readyState !== XMLHttpRequest.DONE) return
+
+      if (XHR.status !== 200) return console.error('Error uploading image')
+      const { responseText: url } = XHR
+
+      console.log('Got back live url:', url)
+      onSuccess(url)
+    }
+    XHR.onerror = (req, ev) => {
+      console.error('Error connecting to server with request:', req, '\nGot response data:', ev)
+    }
+    XHR.open('POST', '//ca-upload.com/here/upload.php')
+    XHR.send(formData)
+}
+
+function downloadCanvas(elLink) {
+    const data = gElCanvas.toDataURL() 
+    elLink.href = data 
+    elLink.download = 'my-img' 
 }

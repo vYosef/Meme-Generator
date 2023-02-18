@@ -1,0 +1,11 @@
+.keyWord {
+    cursor: pointer;
+}
+
+.keyWord:hover {
+    scale: 1.4;
+}
+
+.keyWord p {
+    margin: 0;
+}

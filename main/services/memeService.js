@@ -8,7 +8,9 @@ let gSavedMemes = []
 
 let gCurrSavedMemeId
 
-let gKeywordSearchCountMap = {'funny': 12,'cat': 16, 'baby': 2}
+let gFont = 'Impact'
+
+let gKeywordSearchCountMap = {'funny': 20,'cat': 36, 'baby': 10}
 
 let gImgs = [
     {
@@ -59,7 +61,7 @@ let gImgs = [
     {
         id: 10, 
         url: 'images/10.jpg', 
-        keywords: ['obama', 'laugh']
+        keywords: ['obama', 'funny']
     },
     {
         id: 11, 
@@ -101,6 +103,11 @@ let gImgs = [
         url: 'images/18.jpg', 
         keywords: ['toy', 'story']
     },
+    {
+        id: 19, 
+        url: 'images/19.jpg', 
+        keywords: ['gloat', 'evil']
+    },
 ];
 
 let gMeme = { 
@@ -126,6 +133,10 @@ let gMeme = {
 
 function resetLine() {
     gCurrLine = 0
+}
+
+function setRatio(imgRatio) {
+    gRatio = imgRatio
 }
 
 function resetMeme() {
@@ -155,8 +166,20 @@ function getMeme() {
     return gMeme
 }
 
+function getSearchWords() {
+    return gKeywordSearchCountMap
+}
+
+function updateSearchWords(elWord, searchWordSize) {
+    gKeywordSearchCountMap[elWord] = searchWordSize
+}
+
 function getGImg() {
     return gImgs
+}
+
+function getFont() {
+    return gFont
 }
 
 function setImg() {
@@ -182,7 +205,8 @@ function getCurrLine() {
 }
 
 function switchLine() {
-    if (gCurrLine === 1) gCurrLine -= 1
+    let lastLineIdx = gMeme.lines.length - 1
+    if (gCurrLine === lastLineIdx) gCurrLine = 0
     else gCurrLine += 1
     return gCurrLine
 }
@@ -203,14 +227,16 @@ function changeTextStroke(color) {
 function changeFont(diff) {
     gMeme.lines[gCurrLine].size += diff  
 }
+
+function updateFont(font) {
+    gFont = font
+}
  
 function updateSavedMemes() {
     if(gSavedMemes.length !== 0) return
     let memes = loadMemes()
     if (!memes) return
-    console.log(memes)
     gSavedMemes = memes
-    console.log(gSavedMemes)
 }
 
 function saveMeme() {
@@ -242,7 +268,6 @@ function randomizeId(id) {
 }
 
 function randomizeMeme(id) {
-    console.log(id)
     gMeme = { 
         selectedImgId: id, 
         selectedLineIdx: 0, 
