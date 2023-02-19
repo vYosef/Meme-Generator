@@ -1,10 +1,13 @@
 .search-word-container {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3vw;
+    padding-inline: 20px;
     background-color: lightgray;
-    width: 30%;
+    width: fit-content;
+    height: fit-content;
     border-radius: 25px;
     margin-block-start: 3vh;
-    margin-inline-start: 40%;
-    margin-inline-end: 40%;
-    translate: -10%;
+    margin-inline: auto;
 }

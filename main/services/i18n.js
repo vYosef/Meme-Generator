@@ -20,7 +20,7 @@ var gTrans = {
         he: 'אני גמיש'
     },
     imageSort: {
-        en: 'image sort:',
+        en: 'sort images by key words:',
         he: 'מיין תמונות:'
     },
     memeEditor: {

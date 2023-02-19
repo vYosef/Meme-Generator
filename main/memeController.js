@@ -10,7 +10,7 @@ function setMemeCanvas() {
     gCtx = gElCanvas.getContext('2d')
 }
 
-function renderMeme(imgRatio) {
+function renderMeme() {
     let canvas = document.querySelector('.meme-canvas')
     canvas.height = canvas.width * gRatio
     
@@ -28,9 +28,6 @@ function renderMeme(imgRatio) {
         if (idx === lines.length - 1) pos = gElCanvas.height / 1.1
         writeText(meme, line.txt, pos, idx, font)
     })
-
-    // writeText(meme, currtxt, pos, currLine, font)
-    // writeText(meme, prevTxt, prevPos, prevLine, font)
 }
 
 function resizeCanvas() {
@@ -113,6 +110,7 @@ function onSaveMeme() {
     saveMeme()
     resetMeme()
     renderMeme()
+    onLoadMemes()
 }
 
 function getRandomMeme() {

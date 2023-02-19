@@ -11,9 +11,11 @@
     <header class="header clean-list">
         <ul class="flex space-between clean-list">
             <li class="logo" onclick="showGallery()">LOGO</li>
-            <li class="header-btn" data-trans="Gallery" onclick="showGallery()">Gallery</li>
-            <li class="header-btn" data-trans="Memes" onclick="onLoadMemes()">Memes</li>
-            <li class="about" data-trans="About">About</li>
+            <nav>
+                <li class="header-btn" data-trans="Gallery" onclick="showGallery()">Gallery</li>
+                <li class="header-btn" data-trans="Memes" onclick="onLoadMemes()">Memes</li>
+                <li class="about" data-trans="About">About</li>
+            </nav>
         </ul>
     </header>
     <section>
@@ -23,57 +25,76 @@
         </select>
     </section>
     <section class="gallery">
-        <h1 data-trans="ImageGallery">Image Gallery</h1>
-        <button class="flexible" data-trans="imFlexible" onclick="getRandomMeme()">im flexible</button>
-        </br>
-        <label data-trans="imageSort" for="image-sort">image sort:</label>
-        <input type="text" name="image-sort" 
-        id="image-sort" class="image-sort" onkeyup="onSortImages(this.value)">
-        <div class="search-word-container"></div>
+        <!-- <h1 data-trans="ImageGallery">Image Gallery</h1> -->
+        <section>
+            <button class="flexible" data-trans="imFlexible" onclick="getRandomMeme()">im flexible</button>
+            <div>
+                <label data-trans="imageSort" for="image-sort">sort images by key words:</label>
+                <input type="text" name="image-sort" 
+                id="image-sort" class="image-sort" onkeyup="onSortImages(this.value)">
+            </div>
+            <div class="search-word-container"></div>
+        </section>
+        
         <div class="image-container"></div>
     </section>
     
     <section class="editor hidden">
-        <h1 data-trans="memeEditor" class="editor-title">Meme Editor</h1>
+        <!-- <h1 data-trans="memeEditor" class="editor-title">Meme Editor</h1> -->
         <div class="editor-components">
             <div class="canvas-container">
                 <canvas id="meme-canvas" class="meme-canvas" width="400" height="400"></canvas>
             </div>
             <div class="meme-control">
-                <label data-trans="enterText" for="enter-text">enter text:</label>
-                <input type="text" name="enter-text" 
-                id="enter-text" class="enter-text" onkeyup="onLineType(this.value)">
-                
-                <label data-trans="changeFont" for="font-picker">change font family:</label>
-                <select name="font-picker" 
-                id="font-picker" class="font-picker" onchange="onUpdateFont(this.value)">
-                    <option value="Impact">Impact</option>
-                    <option value="Arial">Arial</option>
-                    <option value="Helvetica">Helvetica</option>
-                    <option value="Verdana">Verdana</option>
-                    <option value="Calibri">Calibri</option>
-                </select>
+                <div class="text-control">
+                    <div class="text-input">
+                        <!-- <label data-trans="enterText" for="enter-text">enter text:</label> -->
+                        <input type="text" name="enter-text" 
+                         id="enter-text" class="enter-text" oninput="onLineType(this.value)">
+                    </div>
+                    <div class="font-line-picker">
+                        <div class="font-input">
+                            <!-- <label data-trans="changeFont" for="font-picker">change font family:</label> -->
+                            <select name="font-picker" 
+                            id="font-picker" class="font-picker" onchange="onUpdateFont(this.value)">
+                                <option value="Impact">Impact</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Helvetica">Helvetica</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Calibri">Calibri</option>
+                            </select>
+                        </div>
+                    
+                        <div class="curr-line-container">
+                            <!-- <label data-trans="currLine" for="curr-line">current line:</label> -->
+                            <div class="curr-line">1</div>
+                            <button data-trans="switchLine" class="switch-line" onclick="onSwitchLine()">switch line</button>
+                        </div>
+                    </div>
+                    
+                </div>
 
-                <label data-trans="currLine" for="curr-line">current line:</label>
-                <div class="curr-line">1</div>
+                <div class="color-control">
+                   <label data-trans="textColor" for="color-picker">change text color</label>
+                    <input type="color" name="color-picker" 
+                    id="color-picker" class="color-picker" onchange="onChangeTextColor(this.value)">
+                    
+                    <label data-trans="textOutline" for="stroke-picker">change text outline</label>
+                    <input type="color" name="stroke-picker" 
+                    id="stroke-picker" class="stroke-picker" onchange="onChangeTextOutline(this.value)"> 
+                </div>
                 
-                <label data-trans="textColor" for="color-picker">change text color</label>
-                <input type="color" name="color-picker" 
-                id="color-picker" class="color-picker" onchange="onChangeTextColor(this.value)">
-                
-                <label data-trans="textOutline" for="stroke-picker">change text outline</label>
-                <input type="color" name="stroke-picker" 
-                id="stroke-picker" class="stroke-picker" onchange="onChangeTextOutline(this.value)">
                 
                 <div class="font-control">
                     <button data-trans="fontGrow" class="font-grow" onclick="onChangeFont(2)">increase font</button>
                     <button data-trans="fontShrink" class="font-shrink" onclick="onChangeFont(-2)">decrease font</button> 
                 </div>
                 
-                <button data-trans="switchLine" class="switch-line" onclick="onSwitchLine()">switch line</button>
-                <button data-trans="save" class="save" onclick="onSaveMeme()">save</button>
-                <button data-trans="upload" class="upload" onclick="onUploadImg()">upload to facebook</button>
-                <button data-trans="download"><a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a></button>
+                <div class="data-btn">
+                    <button data-trans="save" class="save" onclick="onSaveMeme()">save</button>
+                    <button data-trans="upload" class="upload" onclick="onUploadImg()">upload to facebook</button>
+                    <button data-trans="download"><a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a></button>
+                </div>
             </div>
         </div>
         
